@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pes-frontend
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: pes-frontend
+  template:
+    metadata:
+      labels:
+        app: pes-frontend
+    spec:
+      containers:
+      - name: pes-frontend
+        image: registry.digitalocean.com/safwan/frontend:1.0.0
+        ports:
+        - containerPort: 4173

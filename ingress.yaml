@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pes-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-nginx
+spec:
+  tls:
+  - hosts:
+    - safwanspehere.online
+    secretName: backend-kubernetes-tls
+  rules:
+  # - host: "backend.safwanspehere.online"
+  #   http:
+  #     paths:
+  #     - pathType: Prefix
+  #       path: "/"
+  #       backend:
+  #         service:
+  #           name: backend-service
+  #           port:
+  #             number: 80
+    - host: "safwanspehere.online"
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: pes-frontend-service
+              port:
+                number: 80
+  ingressClassName: nginx  
